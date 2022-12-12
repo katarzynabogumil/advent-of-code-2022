@@ -1,3 +1,5 @@
+from functools import reduce
+
 class Monkey:
   def __init__(self, func, func_variable, devisible_test_value, a, b):
     self.items = []
@@ -12,22 +14,15 @@ class Monkey:
 def main():
   monkeys = set_monkeys()
 
-  magic_divide = 1
-  for monkey in monkeys.values():
-    magic_divide *= monkey.test
+  magic_divide = reduce(lambda x, y: x * y, [monkey.test for monkey in monkeys.values()])
 
   round_limit = 10000 # 20 for part 1
-  rounds = 0
-  while rounds < round_limit:
+  for _ in range(round_limit):
     for monkey in monkeys.values():
-      for n in range(len(monkey.items)):
+      for _ in range(len(monkey.items)):
         inspect(monkeys, monkey, magic_divide)
-    rounds +=1
 
-  counters = [monkey.counter for monkey in monkeys.values()]
-  counters.sort()
-  max_counter = counters.pop()
-  max2_counter = counters.pop()
+  max2_counter, max_counter = sorted([monkey.counter for monkey in monkeys.values()])[-2:]
   
   print(max_counter * max2_counter)
 
@@ -39,14 +34,13 @@ def inspect(monkeys, monkey, magic_divide):
   item = item % magic_divide
 
   if item % monkey.test == 0:
-    monkey.items.pop(0)
     receiving_monkey = monkey.test_true
     monkeys[receiving_monkey].items.append(item)
   else:
-    monkey.items.pop(0)
     receiving_monkey = monkey.test_false
     monkeys[receiving_monkey].items.append(item)
 
+  monkey.items.pop(0)
   monkey.counter += 1
 
 
