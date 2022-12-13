@@ -4,8 +4,8 @@ def sum_dir(idx):
     row = rows[idx]
     try:
       sum += int(row.split(' ')[0])
-    except:
-      ValueError
+    except ValueError:
+      pass
     # if sub directory:
     if row[:5] == '$ cd ' and row != '$ cd ..': 
       sub_dir = sum_dir(idx+1)
