@@ -48,7 +48,7 @@ def find_next_steps(grid, routes, step, previous_steps):
         elif ord(next_value) > 96 and ord(next_value) <= ord(start_value) + 1:
           next_steps.add(next_step)
           previous_steps.add(next_step)
-          
+
   routes[step] = next_steps
   return if_found
 
@@ -65,3 +65,4 @@ def find_start(grid, n):
 if __name__ == "__main__":
     main()
 
+    
