@@ -5,8 +5,8 @@ def main():
   rocks = set_rocks(rows)
   lowest_rock = find_lowest(rocks)
 
-  print('part 1:', sand_unit_counter(rocks, lowest_rock, 1))
-  print('part 2:', sand_unit_counter(rocks, lowest_rock + 2, 2) + 1)
+  print('part 1:', sand_unit_counter(rocks, lowest_rock, part=1))
+  print('part 2:', sand_unit_counter(rocks, lowest_rock + 2, part=2) + 1)
 
 
 def sand_unit_counter(rocks, lowest, part):
