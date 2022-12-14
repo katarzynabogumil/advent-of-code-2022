@@ -10,7 +10,7 @@ def main():
   divider_packets = [[[2]], [[6]]]
   input_part_2 = [loads(row) for row in rows if len(row) != 0] + divider_packets
   sort_packets(input_part_2)
-  index_1, index_2 = find_packets(divider_packets, input_part_2)
+  index_1, index_2 = [input_part_2.index(i) + 1 for i in divider_packets]
   print('part 2:', index_1 * index_2)
 
 
@@ -23,14 +23,6 @@ def sort_packets(rows):
         changed = True
     if not changed:
       return
-
-
-def find_packets(packets, rows):
-  result = []
-  for i, row in enumerate(rows):
-    if row in packets:
-      result.append(i + 1)
-  return result
 
 
 def check_right_order(rows):
